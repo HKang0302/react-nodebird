@@ -13,10 +13,10 @@ const ErrorMessage = styled.div`
 const Signup = () => {
     const [id, onChangeId] = useInput('');
     const [nickname, onChangeNickname] = useInput('');
+    
     const [password, onChangePassword] = useInput('');
     const [passwordCheck, setPasswordCheck] = useState('');
     const [passwordError, setPasswordError] = useState(false);
-
     const onChangePasswordCheck = useCallback((e)=>{
         setPasswordCheck(e.target.value);
         setPasswordError(e.target.value !== password);
@@ -27,7 +27,8 @@ const Signup = () => {
     const onChangeTerm = useCallback((e)=>{
         setTerm(e.target.checked);
         setTermError(false);
-    }, []);
+        console.log(term)
+    }, [term]);
 
     const onSubmit = useCallback(()=>{
         if(password !== passwordCheck){
@@ -74,11 +75,11 @@ const Signup = () => {
                     {passwordError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
                 </div>
                 <div>
-                    <Checkbox name="user-term" checked={term} onchange={onChangeTerm}>동의합니다.</Checkbox>
-                    {termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
+                    <Checkbox name="user-term" checked={term} onChange={onChangeTerm}>동의합니다.</Checkbox>
+                    { termError && <ErrorMessage>약관에 동의하셔야 합니다.</ErrorMessage>}
                 </div>
                 <div style={{ marginTop: 10 }}>
-                    <Button type="primary" htmlType='submit'>가입하기</Button>
+                    <Button type="primary" htmlType="submit">가입하기</Button>
                 </div>
             </Form>
         </AppLayout>
